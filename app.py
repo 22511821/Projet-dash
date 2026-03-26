@@ -5,6 +5,7 @@ from dash import dcc, html, Input, Output
 from pages import page1
 from pages import page1_cb
 from pages import page2
+from pages import page2_cb    
 
 app = dash.Dash(
     __name__,
@@ -12,14 +13,14 @@ app = dash.Dash(
     suppress_callback_exceptions=True
 )
 
-# Enregistrement des callbacks page 1
+# Enregistrement des callbacks
 page1_cb.register_callbacks(app)
+page2_cb.register_callbacks(app)   
 
 app.layout = html.Div([
 
     dcc.Location(id="url", refresh=False),
 
-    # Navbar pour naviguer entre les pages
     dbc.NavbarSimple(
         children=[
             dbc.NavItem(dbc.NavLink("Page 1", href="/page1")),
@@ -30,7 +31,6 @@ app.layout = html.Div([
         dark=True
     ),
 
-    # Zone d'affichage
     html.Div(id="contenu-page")
 
 ])
@@ -42,7 +42,7 @@ app.layout = html.Div([
 def afficher_page(pathname):
     if pathname == "/page2":
         return page2.layout
-    return page1.layout  # par défaut : page 1
+    return page1.layout
 
 if __name__ == "__main__":
     app.run(debug=True)
