@@ -4,14 +4,6 @@ from dash import dcc, html, Input, Output
 
 from pages import page1
 from pages import page1_cb
-from pages import page2_cb
-
-import dash
-import dash_bootstrap_components as dbc
-from dash import dcc, html, Input, Output
-
-from pages import page1
-from pages import page1_cb
 from pages import page2
 from pages import page2_cb
 from pages import page3       
