@@ -1,26 +1,26 @@
-# app.py - Fichier principal (Commit 1 : layout page 1 uniquement)
+# app.py - Commit 2 : ajout des callbacks page 1
 
 import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, html, Input, Output
 
-# Import de la page 1 uniquement
 from pages import page1
+from pages import page1_cb  # importation des callbacks
 
-# Création de l'application Dash
 app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.BOOTSTRAP],
     suppress_callback_exceptions=True
 )
 
-# Layout principal
+# Enregistrement des callbacks de p1
+page1_cb.register_callbacks(app)
+
 app.layout = html.Div([
     dcc.Location(id="url", refresh=False),
     html.Div(id="contenu-page")
 ])
 
-# Callback de navigation (simplifié pour commit 1)
 @app.callback(
     Output("contenu-page", "children"),
     Input("url", "pathname")
@@ -28,6 +28,5 @@ app.layout = html.Div([
 def afficher_page(pathname):
     return page1.layout
 
-# Lancement
 if __name__ == "__main__":
     app.run(debug=True)
